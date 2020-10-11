@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "499210001566",
+    "firebase_url": "https://studlifesrm.firebaseio.com",
+    "project_id": "studlifesrm",
+    "storage_bucket": "studlifesrm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499210001566:android:40baf9cf1d7406fa6d6f8f",
+        "android_client_info": {
+          "package_name": "com.vendata.srmstudlife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499210001566-on3pl48d0s4jo83odbep73a9d9ri4avf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vendata.srmstudlife",
+            "certificate_hash": "f97865edf8baa828d130f419c83ddffb39435e5a"
+          }
+        },
+        {
+          "client_id": "499210001566-0l8isu34n8g1c6at9q45fdjnil046nus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_zyYyyxA219JBnbEeaZD_Qn3Z_vrqNdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499210001566-0l8isu34n8g1c6at9q45fdjnil046nus.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
