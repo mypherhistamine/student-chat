@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:studlife_chat/screens/AuthScreen.dart';
 
+// timport 'package:studlife_chat/screens/authScreen.dart';
 void main() {
   runApp(MyApp());
 }
