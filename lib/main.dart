@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'QB Chat',
       theme: ThemeData.dark().copyWith(
         accentColor: Colors.amberAccent,
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'PS',
             ),
       ),
-      home: AuthScreen(),
+      home: SignUpPage(),
     );
   }
 }
