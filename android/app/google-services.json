@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "499210001566-nmv2osvfmiv2bqm2ae8fptt84netcl4f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vendata.srmstudlife",
+            "certificate_hash": "aaa559667534551d86bc5d6cbe11e20239b8c298"
+          }
+        },
+        {
           "client_id": "499210001566-on3pl48d0s4jo83odbep73a9d9ri4avf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -36,7 +44,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "499210001566-0l8isu34n8g1c6at9q45fdjnil046nus.apps.googleusercontent.com",
+              "client_id": "499210001566-qaeocjdq9ddit2b1h1oie2n5i3fat1j1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

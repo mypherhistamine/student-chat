@@ -1,11 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:studlife_chat/screens/AuthScreen.dart';
+import 'dart:async';
 
-// timport 'package:studlife_chat/screens/authScreen.dart';
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:studlife_chat/auth/changeNotifiers/AuthService.dart';
+import 'package:studlife_chat/auth/wrapper.dart';
+import 'package:studlife_chat/screens/register.dart';
+
+void main() {
   runApp(MyApp());
 }
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'PS',
             ),
       ),
-      home: SignUpPage(),
+      home: RegisterUserPage(),
     );
   }
 }
