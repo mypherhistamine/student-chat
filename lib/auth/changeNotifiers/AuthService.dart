@@ -20,13 +20,12 @@ Error list
 class AuthService with ChangeNotifier {
   GoogleSignIn _googleSignIn = GoogleSignIn();
   FirebaseAuth _auth = FirebaseAuth.instance;
-  
 
   bool isLoading = false;
   User currentUser;
   String errorText = "";
 
-  //TODO: fix signout pulling back to verify page despite multiple checks 
+  //TODO: fix signout pulling back to verify page despite multiple checks
   //fixed the bug was that the "Stream was being rebuilt on each change."
 
   void printWrapped(String text) {
@@ -39,57 +38,59 @@ class AuthService with ChangeNotifier {
   static String currentUsername;
 
   static postUserName(String username) async {
-    Dio dio = new Dio()..options=BaseOptions(baseUrl: "http://183.83.48.186",connectTimeout: 10000);
-    try{
+    Dio dio = new Dio()
+      ..options =
+          BaseOptions(baseUrl: "http://183.83.48.186", connectTimeout: 10000);
+    try {
       String token = (await AuthService().getValidToken());
-      Response response = await dio.post('/user/signup',options: Options(validateStatus: (_)=>true,headers: {"token":token}),data: {"username":username});
+      Response response = await dio.post('/user/signup',
+          options:
+              Options(validateStatus: (_) => true, headers: {"token": token}),
+          data: {"username": username});
       print("POSTUSERNAME $response");
       print("status ${response.statusCode}");
-      if(response.statusCode == 200)
-      {
+      if (response.statusCode == 200) {
         currentUsername = username;
         return true;
-      }else if(response.statusCode==409)
-      {
+      } else if (response.statusCode == 409) {
         //conflict
         return false;
-        }{
+      }
+      {
         return null;
       }
-    }catch(e)
-    {
+    } catch (e) {
       print("postusername $e");
       return null;
     }
   }
 
-  static getUserDetails() async
-  {
-    Dio dio = new Dio()..options=BaseOptions(baseUrl: "http://183.83.48.186",connectTimeout: 10000);
-    try{
+  static getUserDetails() async {
+    Dio dio = new Dio()
+      ..options =
+          BaseOptions(baseUrl: "http://183.83.48.186", connectTimeout: 10000);
+    try {
       String token = (await AuthService().getValidToken());
-      Response r = await dio.get('/user',options: Options(validateStatus: (_)=>true,headers: {"token":token}));
+      Response r = await dio.get('/user',
+          options:
+              Options(validateStatus: (_) => true, headers: {"token": token}));
       dio.close();
-      if(r.statusCode == 404)
-      {
+      if (r.statusCode == 404) {
         //putUser
         return false;
-      }else if(r.statusCode == 401)
-      {
-        throw {"error":r,"errorName":"401"};
-      }else if(r.statusCode == 200){
-        
+      } else if (r.statusCode == 401) {
+        throw {"error": r, "errorName": "401"};
+      } else if (r.statusCode == 200) {
         currentUsername = r.data["username"];
         print("Response getuser $r");
         return r;
-      }else{
-        throw {"error":r,"errorName":"Unimplemented Exception"};
+      } else {
+        throw {"error": r, "errorName": "Unimplemented Exception"};
       }
-    } on DioError catch(e)
-    {
+    } on DioError catch (e) {
       print("get user details $e");
       dio.close();
-      throw {"error":e,"errorName":"DioError"};
+      throw {"error": e, "errorName": "DioError"};
     }
   }
 
@@ -111,7 +112,8 @@ class AuthService with ChangeNotifier {
     await currentUser.reload();
     String token = "";
     await currentUser.getIdToken().then((idToken) async {
-      print("interceptor token generated for ${currentUser.displayName}${currentUser.uid}");
+      print(
+          "interceptor token generated for ${currentUser.displayName}${currentUser.uid}");
       token = idToken.token;
     }).catchError((err) {
       print("error no token interceptor");
@@ -132,7 +134,7 @@ class AuthService with ChangeNotifier {
     FirebaseUser user = await _auth.currentUser();
     if (user == null) return false;
     try {
-      user.sendEmailVerification();
+      await user.sendEmailVerification();
       return true;
     } catch (e) {
       print(e.toString());
@@ -235,10 +237,9 @@ class AuthService with ChangeNotifier {
   }
 
   Future<FirebaseUser> registerWithGoogle() async {
-    try{
+    try {
       await _googleSignIn.signOut();
-    }catch(e)
-    {
+    } catch (e) {
       print(e);
     }
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();

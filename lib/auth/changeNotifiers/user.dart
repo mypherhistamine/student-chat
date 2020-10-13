@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class User {
   String name;
   String email;
@@ -6,4 +8,12 @@ class User {
   User({this.email, this.id, this.name});
 }
 
-void getUser({user}) {}
+// Logged in user info
+
+User user;
+
+class UserManage with ChangeNotifier {
+  void getUser({user}) {
+    user = User(email: user.email, name: user.displayName, id: user.uid);
+  }
+}

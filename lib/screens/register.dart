@@ -1,7 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:studlife_chat/auth/changeNotifiers/user.dart';
 import 'package:studlife_chat/constants/themes.dart';
+import 'package:studlife_chat/screens/home.dart';
+import 'package:studlife_chat/screens/verifyEmail.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 import '../auth/changeNotifiers/AuthService.dart';
@@ -114,6 +117,14 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                                         if (user != null && !(user is int)) {
                                           _auth.toggleLoading(false);
                                           print("" + user.toString());
+
+                                          // Provider.of<AuthService>(context,listen: false).sendVerificationLink()
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    VerifyEmail()),
+                                          );
                                         } else {
                                           _auth.toggleLoading(false);
                                           final snackBar = SnackBar(
@@ -178,12 +189,24 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                               onPressed: () async {
                                 //sign in
                                 _auth.toggleLoading(true);
+                                try {
+                                  var result = await _auth.registerWithGoogle();
+                                  if (result == null)
+                                    _auth.toggleLoading(false);
+                                  print("Signed In With");
 
-                                var result = await _auth.registerWithGoogle();
-                                if (result == null) _auth.toggleLoading(false);
-                                print("Signed In With");
-
-                                print(result.displayName);
+                                  print(result.displayName);
+                                  Provider.of<UserManage>(context,
+                                          listen: false)
+                                      .getUser(user: result);
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()),
+                                  );
+                                } catch (err) {
+                                  print(err);
+                                }
                               },
                               color: Colors.white,
                               child: Text("Sign in with Google",
