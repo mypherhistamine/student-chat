@@ -123,7 +123,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    VerifyEmail()),
+                                                    VerifyEmail(user)),
                                           );
                                         } else {
                                           _auth.toggleLoading(false);
@@ -157,6 +157,14 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                                               email, password);
                                           if (user != null && !(user is int)) {
                                             print("" + user.toString());
+                                            Provider.of<UserManage>(context,
+                                                    listen: false)
+                                                .getUser(user: user);
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Home()));
                                           } else {
                                             _auth.toggleLoading(false);
                                             final snackBar = SnackBar(

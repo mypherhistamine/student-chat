@@ -174,6 +174,7 @@ class AuthService with ChangeNotifier {
               email: email, password: password))
           .user;
       print("" + user.toString());
+      return user;
     } catch (e) {
       print(e.toString());
       if (e.toString().contains("ERROR_WRONG_PASSWORD"))
