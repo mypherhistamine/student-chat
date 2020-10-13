@@ -178,8 +178,12 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                               onPressed: () async {
                                 //sign in
                                 _auth.toggleLoading(true);
+
                                 var result = await _auth.registerWithGoogle();
                                 if (result == null) _auth.toggleLoading(false);
+                                print("Signed In With");
+
+                                print(result.displayName);
                               },
                               color: Colors.white,
                               child: Text("Sign in with Google",
