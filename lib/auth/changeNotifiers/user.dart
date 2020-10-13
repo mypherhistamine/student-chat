@@ -1,4 +1,4 @@
-mimor class User {
+class User {
   String name;
   String email;
   String id;
